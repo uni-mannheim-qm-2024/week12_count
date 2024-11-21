@@ -1,9 +1,9 @@
 ---
 title: "QM 2023 Week 12: Count Models"
 author:
-  - "Oliver Rittmann"
+  - "Lisa-Marie Müller"
   - "Domantas Undzėnas"
-date: "November 23 & 24, 2023"
+date: "November 21 & 22, 2024"
 output:
   html_document:
     toc: yes
