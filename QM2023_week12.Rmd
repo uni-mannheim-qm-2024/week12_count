@@ -118,7 +118,7 @@ beta0 <- 1
 beta1 <- 0.5
 
 # and generate an independent variable X
-set.seed(2023)
+set.seed(2024)
 X <- rnorm(n, 0, 1)
 ```
 
@@ -180,6 +180,35 @@ text(x = -1,
      y = 7.85,
      labels = expression(lambda[i] == exp(mu[i])))
 ```
+
+```{r poisson-3-ggplot}
+# Systematic component: LP
+syst <- ggplot() +
+  geom_point(aes(x = X, y = beta0 + beta1*X),
+                 color = viridis(1, 0.5)) +
+  labs(x = expression(X[i]),
+       y = expression(mu[i]),
+       title = "Linear Predictor") +
+  annotate("text",
+           label = expression(mu[i] == X[i] * beta),
+           x = 1.5, y = 0.7,
+           hjust = 0) 
+
+# Systematic component: Lambda
+syst2 <- ggplot() +
+  geom_point(aes(x = X, y = lambda),
+                 color = viridis(1, 0.5)) +
+  labs(x = expression(X[i]),
+       y = expression(lambda[i]),
+       title = expression(paste("Simulated ", lambda))) +
+  annotate("text",
+           label = expression(lambda[i] == exp(mu[i])),
+           x = -1, y = 15) +
+  ylim(range(Y))
+
+syst + syst2
+```
+
 
 Finally, we can get Y from the underlying *Poisson* distribution.
 Remember that it only has one parameter $\lambda$, so-called shape parameter, which defines both the center and the spread of the values.
@@ -488,6 +517,8 @@ LRT <- -2 * L1 + 2 * L2 # converges to chi^2 distribution
 # Reject H0 if ... What is our H0 here?
 LRT > qchisq(0.95, df = 1) # why df = 1? 
 ```
+
+
 ```{r lrt-2}
 #create density curve
 plot(
@@ -616,7 +647,7 @@ Get the `theta`:
 theta <- m2$theta
 
 # we repeat the response function from above,
-# but store the result as lambda (to follow the notation of the formul)
+# but store the result as lambda (to follow the notation of the formula)
 lambda1 <- exp(Xbeta1)
 lambda2 <- exp(Xbeta2)
 lambda3 <- exp(Xbeta3)
