@@ -1,5 +1,5 @@
 ---
-title: "QM 2023 Week 12: Count Models"
+title: "QM 2024 Week 12: Count Models"
 author:
   - "Lisa-Marie Müller"
   - "Domantas Undzėnas"
@@ -500,7 +500,7 @@ stargazer(
 
 The likelihood ratio test is a test to compare two models, one of which is a special case of the other (Restricted and Unrestricted Model).
 
-Let $\mathcal{L_R}$ be the likelihood for the null, *restricted* model with $r$ parameters and $\mathcal{L_R}$ be the likelihood for the alternative, *unrestricted* model with $u$ parameters, $u>r$.
+Let $\mathcal{L_R}$ be the likelihood for the null, *restricted* model with $r$ parameters and $\mathcal{L_U}$ be the likelihood for the alternative, *unrestricted* model with $u$ parameters, $u>r$.
 One can show that when $u \to \infty$, $-2 \log\left(\dfrac{\mathcal{L_R}}{\mathcal{L_U}}\right)$ converges to the $\chi^2$ distribution with $k = u - r$ degrees of freedom.
 See also @degroot_schervish_2012: pp. 543--544.
 
@@ -794,14 +794,11 @@ Start by estimating the model separately, first with the subsetted data on gover
 ```{r fd-1, error = TRUE, warning=TRUE}
 # model on government killings
 m3 <-
-  glm.nb(
-    os_best ~ intensity_dyad + auto + demo + prior_os,
-    data = dta[dta$govt == 1,], # data subsetted to government killings
-    control = glm.control(maxit = 100)
-  )
+
 
 # model on rebel killings
 m4 <-
+
 
 ```
 
@@ -819,12 +816,12 @@ Let's go through the simulation steps again.
 gamma_hat_m3 <- 
 
 # 2. Get the variance-covariance matrix (V_hat)
-V_hat_m3 <- 
+V_hat_m3 <- vcov(m3)
 
 # 3. Set up a multivariate normal distribution N(gamma_hat,V_hat)
 # 4. Draw from the distribution nsim times
-nsim <-
-S_m3 <-
+nsim <- 
+S_m3 <- 
 
 # Set up interesting scenarios.
 
@@ -834,23 +831,23 @@ S_m3 <-
 # demo - democracy 
 # prior_os - prior one-sided violence
 
-scenario1 <-
-scenario2 <-
-scenario3 <-
+scenario1 <- 
+scenario2 <- 
+scenario3 <- 
 
 
 Xbeta1_m3 <- 
-Xbeta2_m3 <-
+Xbeta2_m3 <- 
 Xbeta3_m3 <- 
 
 # To get expected values, we need to plug in the Xbeta values into the response function
-exp_scenario1_m3 <- 
+exp_scenario1_m3 <-
 exp_scenario2_m3 <- 
 exp_scenario3_m3 <- 
 
 
-exp_values_m3 <- cbind(exp_scenario1_m3, exp_scenario2_m3, exp_scenario3_m3)
-df_m3 <- data.frame(exp_values_m3)
+exp_values_m3 <- 
+df_m3 <- 
 ```
 
 We need to do the same thing for model 4.
@@ -864,8 +861,8 @@ V_hat_m4 <-
 
 # 3. Set up a multivariate normal distribution N(gamma_hat,V_hat)
 # 4. Draw from the distribution nsim times
-nsim <-
-S_m4 <-
+nsim <- 
+S_m4 <- 
 
 # Set up interesting scenarios.
 
@@ -875,9 +872,9 @@ S_m4 <-
 # demo - democracy 
 # prior_os - prior one-sided violence
 
-scenario1 <-
-scenario2 <-
-scenario3 <-
+scenario1 <- 
+scenario2 <- 
+scenario3 <- 
 
 
 Xbeta1_m4 <- 
@@ -885,11 +882,12 @@ Xbeta2_m4 <-
 Xbeta3_m4 <- 
 
 # To get expected values, we need to plug in the Xbeta values into the response function
-exp_scenario1_m4 <-
+exp_scenario1_m4 <- 
 exp_scenario2_m4 <- 
 exp_scenario3_m4 <- 
 
-exp_values_m4 <-
+
+exp_values_m4 <- 
 df_m4 <- 
 ```
 
@@ -938,7 +936,7 @@ median_fd_auto_dem_m4 <-
 ci_fd_auto_dem_m4 <- 
 
 # Autocracy - Democracy, M4 (by Rebel Groups)
-median_fd_auto_ano_m4 <-
+median_fd_auto_ano_m4 <- 
 ci_fd_auto_ano_m4 <- 
 ```
 
